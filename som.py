@@ -24,6 +24,7 @@ som.train_random(data = X, num_iteration = 100)
 # Visualizing the results
 from pylab import bone, pcolor, colorbar, plot, show
 bone()
+#pcolor(som.distance_map())
 pcolor(som.distance_map().T)
 colorbar()
 markers = ['o', 's']
@@ -41,5 +42,6 @@ show()
 
 # Finding the frauds
 mappings = som.win_map(X)
-frauds = np.concatenate((mappings[(8,1)], mappings[(6,8)]), axis = 0)
+frauds = np.concatenate((mappings[(7,3)], mappings[(7,4)]), axis = 0)
 frauds = sc.inverse_transform(frauds)
+# change the float format to %.3f
