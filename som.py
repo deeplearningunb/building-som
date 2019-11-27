@@ -19,7 +19,7 @@ X = sc.fit_transform(X)
 from minisom import MiniSom
 som = MiniSom(x = 10, y = 10, input_len = 15, sigma = 1.0, learning_rate = 0.5)
 som.random_weights_init(X)
-som.train_random(data = X, num_iteration = 100)
+som.train_random(data = X, num_iteration = 1000)
 
 # Visualizing the results
 from pylab import bone, pcolor, colorbar, plot, show
@@ -42,6 +42,6 @@ show()
 
 # Finding the frauds
 mappings = som.win_map(X)
-frauds = np.concatenate((mappings[(7,3)], mappings[(7,4)]), axis = 0)
+frauds = np.concatenate((mappings[(8,4)], mappings[(7,4)]), axis = 0)
 frauds = sc.inverse_transform(frauds)
 # change the float format to %.3f
