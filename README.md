@@ -5,3 +5,6 @@ Self Organizing Maps
 ## Download Minisom
 
 `https://github.com/JustGlowing/minisom/blob/master/minisom.py`
+
+# Map Image
+![map](map.png)
