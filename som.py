@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 # Importing the dataset
-dataset = pd.read_csv('Credit_Card_Applications.csv')
+dataset = pd.read_csv('/Users/caiofernandes/Desktop/Projetos/DeepLearning/BuildingSOM/building-som/Credit_Card_Applications.csv')
 X = dataset.iloc[:, :-1].values
 y = dataset.iloc[:, -1].values
 
@@ -19,7 +19,7 @@ X = sc.fit_transform(X)
 from minisom import MiniSom
 som = MiniSom(x = 10, y = 10, input_len = 15, sigma = 1.0, learning_rate = 0.5)
 som.random_weights_init(X)
-som.train_random(data = X, num_iteration = 100)
+som.train_random(data = X, num_iteration = 1000)
 
 # Visualizing the results
 from pylab import bone, pcolor, colorbar, plot, show
@@ -28,7 +28,7 @@ bone()
 pcolor(som.distance_map().T)
 colorbar()
 markers = ['o', 's']
-colors = ['r', 'g']
+colors = ['r', 'b']
 for i, x in enumerate(X):
     w = som.winner(x)
     plot(w[0] + 0.5,
