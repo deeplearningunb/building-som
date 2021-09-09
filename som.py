@@ -42,6 +42,33 @@ show()
 
 # Finding the frauds
 mappings = som.win_map(X)
-frauds = np.concatenate((mappings[(7,3)], mappings[(7,4)]), axis = 0)
+frauds = np.concatenate((mappings[(7,3)], mappings[(7,3)]), axis = 0)
 frauds = sc.inverse_transform(frauds)
 # change the float format to %.3f
+
+# Finding frauds with SimpSOM
+import pandas as pd
+import SimpSOM as sps
+from sklearn.cluster import KMeans
+import numpy as np
+
+net = sps.somNet(20, 20, X, PBC=True)
+net.train(0.5, 100)
+
+net.save('filename_weights')
+net.nodes_graph(colnum=0)
+
+net.diff_graph()
+
+## Projecting the data points on the new 2D network map ##
+
+prj = np.array(net.project(X))
+plt.scatter(prj.T[0],prj.T[1])
+plt.show()
+
+kmeans = KMeans(n_clusters=3, random_state=0).fit(prj)
+dataset["clusters"]=kmeans.labels_
+
+## SOM combined with k means gives me cluster 0 is related to fraud. ##
+
+dataset[dataset["clusters"]==0].head(20) # First 20 frauds
